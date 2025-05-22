@@ -14,6 +14,8 @@
     <header>
       <div class="header-content">
         <h1>ModernPick</h1>
+        <!-- Placeholder for potential advanced settings cog icon/button -->
+        <!-- <button id="advanced-settings-btn" class="btn btn-icon" aria-label="Advanced Settings">⚙️</button> -->
         <div id="buy-me-a-coffee-link-container">
           <a href="https://www.buymeacoffee.com/YOUR_USERNAME_HERE" target="_blank" id="bmac-link"><span class="bmac-icon">☕</span> Buy Me a Coffee</a>
         </div>
@@ -21,40 +23,45 @@
     </header>
 
     <main>
-      <button id="eyedropper-btn" class="btn btn-primary">
-        Pick Color
-      </button>
-
-      <div id="color-display-area">
-        <div id="color-swatch"></div>
-        <div id="color-value-container">
-          <span id="color-value">#FFFFFF</span>
-        </div>
-        <div id="css-color-name" class="css-color-name"></div>
-      </div>
-
-      <div id="color-controls">
-        <div class="format-selector">
-          <button class="btn format-btn active" data-format="hex">HEX</button>
-          <button class="btn format-btn" data-format="rgb">RGB</button>
-          <button class="btn format-btn" data-format="hsl">HSL</button>
-        </div>
-        <button id="copy-btn" class="btn">
-          Copy
+      <section id="primary-action-zone" aria-labelledby="primary-action-heading">
+        <h2 id="primary-action-heading" class="visually-hidden">Core Color Picking</h2>
+        <button id="eyedropper-btn" class="btn btn-primary">
+          Pick Color
         </button>
-      </div>
 
-      <div id="color-history-area">
-        <h2>History</h2>
+        <div id="color-display-area">
+          <div id="color-swatch"></div>
+          <div id="color-value-container">
+            <span id="color-value">#FFFFFF</span>
+          </div>
+          <div id="css-color-name" class="css-color-name"></div>
+        </div>
+      </section>
+
+      <section id="controls-section" aria-labelledby="controls-section-heading">
+        <h2 id="controls-section-heading" class="visually-hidden">Color Format and Copy</h2>
+        <div id="color-controls">
+          <div class="format-selector">
+            <button class="btn format-btn active" data-format="hex">HEX</button>
+            <button class="btn format-btn" data-format="rgb">RGB</button>
+            <button class="btn format-btn" data-format="hsl">HSL</button>
+          </div>
+          <button id="copy-btn" class="btn">
+            Copy
+          </button>
+        </div>
+      </section>
+
+      <section id="history-section" aria-labelledby="history-section-heading">
+        <h2 id="history-section-heading">History</h2>
         <div id="history-list">
           <!-- Recently picked colors will be appended here by JS -->
         </div>
         <button id="clear-history-btn" class="btn btn-secondary">Clear History</button>
-      </div>
+      </section>
 
-      <!-- NEW Settings Section -->
-      <div class="settings-section">
-        <h2>Settings</h2>
+      <section id="settings-section" aria-labelledby="settings-section-heading">
+        <h2 id="settings-section-heading">Settings</h2>
         <div class="setting-item">
           <label for="history-size-select">History Size:</label>
           <select id="history-size-select" class="select-css">
@@ -64,13 +71,33 @@
             <option value="15">15 Colors</option>
           </select>
         </div>
-      </div>
+        <!-- Placeholder for more settings if needed -->
+        <!-- <div class="setting-item">
+          <label for="another-setting">Another Setting:</label>
+          <input type="checkbox" id="another-setting">
+        </div> -->
+      </section>
     </main>
 
     <footer>
-      <!-- Optional: Footer content like version or links -->
+      <p id="version-info"><!-- Version 2.0.0 --></p>
+      <!-- Optional: Additional footer content like links -->
     </footer>
   </div>
   <script src="popup.js"></script>
+  <!-- Visually hidden class for screen readers -->
+  <style>
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
 </body>
 </html> 
