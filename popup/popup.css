@@ -1,368 +1,459 @@
-/* Basic styles for ModernPick popup */
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  min-width: 320px; /* Increased for better layout */
-  background-color: #ffffff; /* Light background */
-  color: #09090b; /* Dark text - common in shadcn */
-  margin: 0;
-  padding: 0;
-  font-size: 14px;
+/* ModernPick V2.0 - Refined Shadcn Pro CSS */
+
+/* --- CSS Variables --- */
+:root {
+  /* Color Palette (Light Theme) */
+  --background-primary: #FFFFFF;
+  --background-secondary: #F9FAFB; /* For slightly offset areas like color display */
+  --text-primary: #0A0A0A; /* Near black for high contrast */
+  --text-secondary: #52525B; /* Muted gray for labels, secondary info */
+  --text-on-accent: #FFFFFF;
+  --border-primary: #E4E4E7; /* Subtle border for containers/dividers */
+  --border-secondary: #D4D4D8; /* Slightly darker for input fields or active elements */
+  --border-focus: var(--accent-primary);
+
+  /* Accent Colors */
+  --accent-primary: #2563EB; /* Professional Blue */
+  --accent-primary-hover: #1D4ED8; /* Darker blue for hover */
+  --button-secondary-bg: #F4F4F5;
+  --button-secondary-hover-bg: #E4E4E7;
+  --button-secondary-text: var(--text-primary);
+  --button-secondary-border: var(--border-secondary);
+
+  /* Functional Colors */
+  --destructive-color: #DC2626; /* Red for delete/clear */
+  --destructive-hover-bg: #B91C1C;
+  --success-color: #10B981; /* Green for success */
+  --success-hover-bg: #0F9A6B;
+
+  /* Typography */
+  --font-family-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  --font-size-xs: 0.75rem;  /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem;   /* 16px - increased base for better readability */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Spacing (based on 4px grid) */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+
+  /* Radius */
+  --radius-sm: 3px;
+  --radius-md: 6px; /* Standard radius */
+  --radius-lg: 8px;
+  --radius-full: 9999px; /* Pill shape */
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  /* Transitions */
+  --transition-colors: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out;
+  --transition-shadow: box-shadow 0.15s ease-in-out;
+  --transition-transform: transform 0.15s ease-in-out;
 }
 
+/* --- Base & Reset --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm); /* Default to 14px */
+  line-height: 1.5;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  min-width: 340px; /* Adjusted for a bit more space */
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2 {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+}
+
+h1 {
+  font-size: 1.25rem; /* 20px */
+}
+
+h2 { /* For section titles */
+  font-size: 1rem; /* 16px */
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-3); /* Space below section titles */
+  padding-bottom: var(--spacing-2);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+/* --- General Layout --- */
 .container {
-  padding: 16px;
+  padding: var(--spacing-4); /* 16px */
   display: flex;
   flex-direction: column;
-  gap: 16px; /* Spacing between sections */
+  gap: var(--spacing-5); /* Increased gap between major layout areas (header, main, footer) */
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
+  display: flex; /* For .header-content */
   align-items: center;
-  border-bottom: 1px solid #e4e4e7; /* Subtle border */
-  padding-bottom: 12px;
-}
-
-header h1 {
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0; /* Remove default h1 margin */
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* Increased gap for main sections */
-}
-
-/* --- Button Styles (shadcn-inspired) --- */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px; /* Fully rounded for a pill shape */
-  font-size: 14px;
-  font-weight: 500;
-  padding: 10px 18px; /* Slightly adjusted padding for aesthetics with roundness */
-  cursor: pointer;
-  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  border: 1px solid transparent;
-  text-decoration: none;
-  white-space: nowrap;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* Subtle shadow */
-}
-
-.btn:hover {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1); /* Slightly more pronounced shadow on hover */
-}
-
-.btn-primary {
-  background-color: #09090b; /* Primary button background (dark) */
-  color: #fafafa; /* Primary button text (light) */
-  border-color: #09090b;
-}
-
-.btn-primary:hover {
-  background-color: #27272a; /* Darker hover for primary */
-}
-
-.btn-secondary {
-  background-color: #f4f4f5; /* Secondary button background (light gray) */
-  color: #09090b; /* Secondary button text (dark) */
-  border-color: #e4e4e7;
-}
-
-.btn-secondary:hover {
-  background-color: #e4e4e7; /* Darker hover for secondary */
-}
-
-/* --- Eyedropper & Color Display --- */
-#eyedropper-btn {
-  width: 100%;
-}
-
-#color-display-area {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  border: 1px solid #e4e4e7;
-  border-radius: 6px;
-  background-color: #f9fafb; /* Slightly off-white background for this area */
-}
-
-#color-swatch {
-  width: 40px;
-  height: 40px;
-  border-radius: 4px;
-  border: 1px solid #d4d4d8;
-  background-color: #FFFFFF; /* Default, will be updated by JS */
-}
-
-#color-value-container {
-  flex-grow: 1;
-}
-
-#color-value {
-  font-size: 16px;
-  font-weight: 500;
-  font-family: monospace; /* Monospaced font for color codes */
-}
-
-/* --- Color Controls --- */
-#color-controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-
-.format-selector {
-  display: flex;
-  border: 1px solid #e4e4e7;
-  border-radius: 6px;
-  overflow: hidden; /* To make child button borders look like a single unit */
-}
-
-.format-btn {
-  background-color: #ffffff;
-  color: #3f3f46;
-  border-radius: 0;
-  padding: 8px 12px;
-  border: none; /* Remove individual borders */
-  border-right: 1px solid #e4e4e7; /* Separator */
-  font-size: 13px;
-}
-
-.format-btn:last-child {
-  border-right: none;
-}
-
-.format-btn.active {
-  background-color: #f4f4f5; /* Active state for format button */
-  color: #09090b;
-  font-weight: 600;
-}
-
-.format-btn:hover:not(.active) {
-  background-color: #f9fafb;
-}
-
-#copy-btn {
-  min-width: 80px; /* Give copy button some base width */
-}
-
-/* --- Color History --- */
-#color-history-area h2 {
-  font-size: 16px;
-  font-weight: 600;
-  margin-top: 12px; /* Added some top margin */
-  margin-bottom: 8px;
-  border-bottom: 1px solid #e4e4e7;
-  padding-bottom: 8px;
-}
-
-#history-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px; /* Spacing between swatches */
-  min-height: 32px; /* Enough for one row of swatches or empty message */
-  padding: 4px 0; /* Padding top/bottom */
-  align-items: center; /* Center items if list is short */
-}
-
-.history-list-empty-message {
-  font-style: italic;
-  color: #71717a;
-  font-size: 13px;
-  width: 100%;
-  text-align: center;
-  padding: 4px 0; /* Consistent with list padding */
-}
-
-.history-swatch {
-  width: 28px;
-  height: 28px;
-  border-radius: 4px;
-  border: 1px solid #d4d4d8;
-  cursor: pointer;
-  transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
-  display: inline-flex;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-}
-
-.history-swatch:hover {
-  transform: scale(1.1);
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.07);
-}
-
-#clear-history-btn {
-  margin-top: 12px;
-  align-self: flex-start;
-  padding: 6px 12px; /* Make it a bit smaller */
-  font-size: 13px;
-}
-
-footer {
-  font-size: 12px;
-  color: #71717a;
-  text-align: center;
-  padding-top: 12px;
-  border-top: 1px solid #e4e4e7;
-  margin-top: auto; /* Pushes footer to bottom if content is short */
-}
-
-/* Placeholder for Buy Me A Coffee link styling */
-#buy-me-a-coffee-placeholder a {
-  font-size: 13px;
-  color: #18181b;
-  text-decoration: none;
-  font-weight: 500;
-}
-#buy-me-a-coffee-placeholder a:hover {
-  text-decoration: underline;
-}
-
-/* --- Copy Button Feedback --- */
-#copy-btn.copied {
-  background-color: #10b981; /* Success green */
-  color: #ffffff; /* White text on green background */
-  border-color: #0f9a6b; /* Slightly darker green border */
-  animation: pop 0.3s ease-in-out;
-}
-
-@keyframes pop {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-
-/* --- Buy Me A Coffee Link --- */
-#buy-me-a-coffee-link-container {
-  /* Aligns the link to the far right of the header-content flex container */
-  /* No specific styles needed for the container itself now */
-}
-
-#bmac-link {
-  background-color: #FFDD00; /* Classic Buy Me a Coffee yellow - now default */
-  color: #000000; /* Black text - now default */
-  text-decoration: none;
-  font-weight: 600; /* Made it a bit bolder */
-  font-size: 12px;
-  padding: 6px 10px; /* Adjusted padding */
-  border-radius: 6px; /* Standard button rounding */
-  transition: background-color 0.15s ease-in-out, transform 0.1s ease-in-out;
-  display: inline-flex; /* To align icon and text */
-  align-items: center;
-  gap: 6px; /* Space between icon and text */
-  border: 1px solid #E5C700; /* Darker yellow border */
-}
-
-#bmac-link:hover {
-  background-color: #E5C700; /* Darker yellow on hover */
-  color: #000000;
-  transform: translateY(-1px); /* Slight lift on hover */
-}
-
-.bmac-icon {
-  font-size: 14px; /* Adjust icon size if needed */
-  line-height: 1; /* Helps with vertical alignment */
-}
-
-/* --- Main Content Area --- */
-main {
-  margin: 0;
-  padding: 16px;
+  padding-bottom: var(--spacing-3); /* Space below header */
+  border-bottom: 1px solid var(--border-primary);
 }
 
 .header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%; /* Ensure it takes full width of the header */
+  width: 100%;
 }
 
-/* --- NEW Notification Area Styles --- */
-#notification-area {
-  padding: 10px;
-  margin-bottom: 10px; /* Space below it before the header */
-  border-radius: 6px;
+main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5); /* Increased gap between sections in main */
+}
+
+section {
+  /* Sections already have h2 with margin-bottom, so direct section spacing might not be needed unless for specific cases */
+}
+
+footer {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
   text-align: center;
-  font-size: 14px;
-  font-weight: 500;
-  display: none; /* Hidden by default */
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  opacity: 0;
-  transform: translateY(-20px);
+  padding-top: var(--spacing-3);
+  border-top: 1px solid var(--border-primary);
+  margin-top: auto; /* Pushes footer to bottom */
 }
 
-#notification-area.visible {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
+/* --- Button Styles --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-md); /* Default to medium radius */
+  padding: var(--spacing-2) var(--spacing-4); /* 8px 16px */
+  cursor: pointer;
+  transition: var(--transition-colors), var(--transition-shadow), var(--transition-transform);
+  border: 1px solid transparent;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+}
+.btn:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+.btn:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
 }
 
-#notification-area.success {
-  background-color: #10b981; /* Green for success (same as .copied) */
-  color: #ffffff;
-  border: 1px solid #0f9a6b;
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: var(--text-on-accent);
+  border-color: var(--accent-primary);
+}
+.btn-primary:hover {
+  background-color: var(--accent-primary-hover);
+  border-color: var(--accent-primary-hover);
 }
 
-#notification-area.error {
-  background-color: #ef4444; /* Red for error */
-  color: #ffffff;
-  border: 1px solid #dc2626;
+.btn-secondary {
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+  border-color: var(--button-secondary-border);
+}
+.btn-secondary:hover {
+  background-color: var(--button-secondary-hover-bg);
 }
 
-/* --- NEW Settings Section Styles --- */
-.settings-section {
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid #e4e4e7; /* Subtle border from shadcn */
+/* Pill shaped variant - for specific buttons like format selectors if desired */
+.btn-pill {
+  border-radius: var(--radius-full);
 }
 
-.settings-section h2 {
-  font-size: 16px;
-  font-weight: 600;
-  margin-top: 0; /* Reset margin as section has padding */
-  margin-bottom: 12px;
+/* --- Specific Element Styling --- */
+
+/* Header */
+#bmac-link {
+  background-color: #FFDD00; /* BMAC Yellow */
+  color: #000000;
+  text-decoration: none;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xs);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-sm);
+  transition: background-color 0.15s ease-in-out, transform 0.1s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  border: 1px solid #E5C700; /* Darker yellow border */
 }
+#bmac-link:hover {
+  background-color: #E5C700;
+  transform: translateY(-1px);
+}
+.bmac-icon {
+  font-size: 1.1em;
+}
+
+/* Primary Action Zone */
+#primary-action-zone {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4); /* Space between button and display area */
+}
+
+#eyedropper-btn {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4); /* Larger padding for primary action */
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+#color-display-area {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  background-color: var(--background-secondary);
+}
+
+#color-swatch {
+  width: 48px; /* Larger swatch */
+  height: 48px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-secondary);
+  background-color: #FFFFFF; /* Default, updated by JS */
+  box-shadow: var(--shadow-sm);
+}
+
+#color-value-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column; /* Stack color value and CSS name */
+  gap: var(--spacing-1);
+}
+
+#color-value {
+  font-size: var(--font-size-base); /* Slightly larger for better visibility */
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-family-mono);
+  color: var(--text-primary);
+}
+
+.css-color-name {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  min-height: 1.2em;
+}
+
+/* Controls Section */
+#controls-section h2 { display: none; } /* Visually hidden heading handled by HTML */
+
+#color-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.format-selector {
+  display: inline-flex;
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-md);
+  overflow: hidden; /* To clip child button borders */
+  box-shadow: var(--shadow-sm);
+}
+
+.format-btn {
+  background-color: var(--background-primary);
+  color: var(--text-secondary);
+  border-radius: 0;
+  padding: var(--spacing-2) var(--spacing-3);
+  border: none;
+  border-right: 1px solid var(--border-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal); /* Normal weight for non-active */
+  box-shadow: none;
+  transform: none; /* No lift on hover for these */
+}
+.format-btn:last-child {
+  border-right: none;
+}
+.format-btn.active {
+  background-color: var(--accent-primary);
+  color: var(--text-on-accent);
+  font-weight: var(--font-weight-medium);
+}
+.format-btn:hover:not(.active) {
+  background-color: var(--button-secondary-bg); /* Subtle hover for non-active */
+  box-shadow: none;
+  transform: none;
+}
+
+#copy-btn {
+  /* Uses .btn and .btn-primary or .btn-secondary already */
+  min-width: 90px;
+}
+#copy-btn.copied {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+  color: var(--text-on-accent);
+  animation: pop 0.3s ease-in-out;
+}
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); } /* Slightly less pop */
+  100% { transform: scale(1); }
+}
+
+
+/* History Section */
+#history-section h2 { /* Section title style from base h2 */ }
+
+#history-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  min-height: 36px; /* Enough for one row of larger swatches */
+  padding: var(--spacing-1) 0;
+  align-items: center;
+}
+
+.history-list-empty-message {
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  width: 100%;
+  text-align: center;
+  padding: var(--spacing-2) 0;
+}
+
+.history-swatch {
+  width: 32px; /* Slightly larger */
+  height: 32px;
+  border-radius: var(--radius-md); /* Consistent radius */
+  border: 1px solid var(--border-secondary);
+  cursor: pointer;
+  transition: var(--transition-transform), var(--transition-shadow);
+  box-shadow: var(--shadow-sm);
+}
+.history-swatch:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-primary);
+}
+.history-swatch:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 1px;
+}
+
+#clear-history-btn {
+  margin-top: var(--spacing-3);
+  align-self: flex-start;
+  padding: var(--spacing-1) var(--spacing-3);
+  font-size: var(--font-size-xs);
+  background-color: transparent;
+  color: var(--destructive-color);
+  border-color: transparent; /* Make it look more like a link button */
+  box-shadow: none;
+}
+#clear-history-btn:hover {
+  background-color: var(--destructive-color);
+  color: var(--text-on-accent);
+  border-color: var(--destructive-color);
+  box-shadow: var(--shadow-sm); /* Add shadow on hover for feedback */
+}
+
+/* Settings Section */
+#settings-section h2 { /* Section title style from base h2 */ }
 
 .setting-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0; /* Padding for each setting item */
+  padding: var(--spacing-2) 0; /* Padding for each setting item */
 }
-
 .setting-item label {
-  font-size: 14px;
-  color: #3f3f46; /* Slightly muted text color */
+  font-size: var(--font-size-sm);
+  color: var(--text-primary); /* Primary text for labels */
 }
 
 .select-css {
-  padding: 8px 12px;
-  border: 1px solid #d4d4d8; /* Standard border */
-  border-radius: 6px; /* Consistent rounding */
-  background-color: #ffffff; /* White background */
-  color: #09090b;
-  font-size: 14px;
-  min-width: 100px; /* Give it some base width */
+  padding: var(--spacing-2) var(--spacing-3);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-md);
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  min-width: 120px; /* Give it some base width */
   cursor: pointer;
+  transition: var(--transition-colors);
+  box-shadow: var(--shadow-sm);
 }
-
 .select-css:focus {
   outline: none;
-  border-color: #09090b; /* Darker border on focus, shadcn style */
-  box-shadow: 0 0 0 2px rgba(9, 9, 11, 0.1); /* Focus ring */
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 2px var(--accent-primary); /* Focus ring */
 }
 
-/* NEW: Styles for CSS Color Name */
-.css-color-name {
-  font-size: 0.8em;
-  color: #777;
-  margin-top: 4px; /* Add some space above the name */
-  min-height: 1.2em; /* Reserve space even if empty, prevents layout shift */
-  text-align: center; /* Align with swatch and value */
+/* Notification Area Styles */
+#notification-area {
+  padding: var(--spacing-2) var(--spacing-3);
+  margin-bottom: var(--spacing-3);
+  border-radius: var(--radius-md);
+  text-align: center;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  display: none; /* Hidden by default */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(-20px);
+  color: var(--text-on-accent);
+  box-shadow: var(--shadow-md);
+}
+#notification-area.visible {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+#notification-area.success {
+  background-color: var(--success-color);
+  border: 1px solid var(--success-hover-bg);
+}
+#notification-area.error {
+  background-color: var(--destructive-color);
+  border: 1px solid var(--destructive-hover-bg);
+}
+
+/* Visually Hidden Class (already in HTML, but good to have here for reference) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
